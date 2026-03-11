@@ -1,0 +1,15 @@
+{
+  "rewrites": [
+    { "source": "/28-wire-nervous-system-report", "destination": "/28-wire-nervous-system-report/index.html" },
+    { "source": "/", "destination": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Cache-Control", "value": "public, max-age=3600" }
+      ]
+    }
+  ]
+}

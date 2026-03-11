@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paper to Production — Metaventions AI</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface-2: #1a1a2e;
+    --border: #2a2a3e;
+    --text: #e0e0e8;
+    --text-dim: #8888a0;
+    --accent: #7c5cff;
+    --accent-glow: rgba(124,92,255,0.15);
+    --green: #00d68f;
+    --amber: #ffb74d;
+    --blue: #5ca0ff;
+    --cyan: #00d4ff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 40px;
+  }
+
+  .wrap { max-width: 820px; width: 100%; }
+
+  .badge {
+    display: inline-block;
+    padding: 4px 14px;
+    background: var(--accent-glow);
+    border: 1px solid var(--accent);
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+
+  h1 {
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, var(--text) 30%, var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .subtitle {
+    font-size: 17px;
+    color: var(--text-dim);
+    font-weight: 300;
+    line-height: 1.7;
+    margin-bottom: 48px;
+    max-width: 600px;
+  }
+
+  .reports {
+    display: grid;
+    gap: 16px;
+  }
+
+  .report-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 32px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .report-card:hover {
+    border-color: var(--accent);
+    background: var(--surface-2);
+  }
+
+  .report-card .rc-left { flex: 1; }
+
+  .report-card .rc-tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .report-card .rc-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .report-card .rc-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  .report-card .rc-meta {
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+  }
+
+  .report-card .rc-pill {
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--accent-glow);
+    color: var(--accent);
+    padding: 3px 10px;
+    border-radius: 4px;
+    border: 1px solid rgba(124,92,255,0.3);
+  }
+
+  .report-card .rc-pill.green {
+    background: rgba(0,214,143,0.1);
+    color: var(--green);
+    border-color: rgba(0,214,143,0.3);
+  }
+
+  .report-card .rc-arrow {
+    font-size: 20px;
+    color: var(--text-dim);
+    transition: color 0.2s, transform 0.2s;
+    flex-shrink: 0;
+  }
+
+  .report-card:hover .rc-arrow {
+    color: var(--accent);
+    transform: translateX(4px);
+  }
+
+  .footer {
+    margin-top: 60px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-dim);
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="badge">Paper to Production</div>
+  <h1>From Research<br>to Running Systems</h1>
+  <p class="subtitle">Technical architecture reports from the Metaventions D-Ecosystem — rigorous, benchmarked, and deployed.</p>
+
+  <div class="reports">
+
+    <a href="/28-wire-nervous-system-report" class="report-card">
+      <div class="rc-left">
+        <div class="rc-tag">Architecture Report &middot; March 11, 2026</div>
+        <div class="rc-title">The 28-Wire Nervous System</div>
+        <div class="rc-desc">How 17 isolated AI components were wired into a compound intelligence engine — with measurable DQ improvement, autonomous SUPERMAX escalation, and 6 closed feedback loops.</div>
+        <div class="rc-meta">
+          <span class="rc-pill green">DQ 0.704 &rarr; 0.952</span>
+          <span class="rc-pill green">+32% in one session</span>
+          <span class="rc-pill">28 wires</span>
+          <span class="rc-pill">Wire 23: Auto-escalation</span>
+          <span class="rc-pill">SUPERMAX +12.4%</span>
+        </div>
+      </div>
+      <div class="rc-arrow">&#x2192;</div>
+    </a>
+
+  </div>
+
+  <div class="footer">
+    Metaventions AI &middot; D-Ecosystem &middot; Sovereign AI Infrastructure
+  </div>
+
+</div>
+</body>
+</html>
