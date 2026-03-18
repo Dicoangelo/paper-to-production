@@ -1,16 +1,16 @@
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0a0a0f,50:7c5cff,100:00d68f&height=200&section=header&text=Paper%20to%20Production&fontSize=42&fontColor=ffffff&animation=fadeIn&fontAlignY=36&desc=Technical%20Architecture%20Reports%20%E2%80%94%20From%20Research%20to%20Running%20Systems&descAlignY=56&descSize=16" width="100%" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:08080d,50:E8754A,100:4AE8A0&height=200&section=header&text=Paper%20to%20Production&fontSize=42&fontColor=ffffff&animation=fadeIn&fontAlignY=36&desc=Technical%20Architecture%20Reports%20%E2%80%94%20From%20Research%20to%20Running%20Systems&descAlignY=56&descSize=16" width="100%" />
 </p>
 
 <p align="center">
-  <a href="https://paper-to-production.vercel.app"><img src="https://img.shields.io/badge/live-paper--to--production.vercel.app-7c5cff?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Site" /></a>
-  <img src="https://img.shields.io/badge/license-MIT-00d68f?style=for-the-badge" alt="MIT License" />
+  <a href="https://paper-to-production.vercel.app"><img src="https://img.shields.io/badge/live-paper--to--production.vercel.app-E8754A?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Site" /></a>
+  <img src="https://img.shields.io/badge/license-MIT-4AE8A0?style=for-the-badge" alt="MIT License" />
   <img src="https://img.shields.io/badge/deployed-Vercel-000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel" />
 </p>
 
 <p align="center">
-  <b>Rigorous, benchmarked, and deployed.</b><br/>
-  Architecture reports from the Metaventions D-Ecosystem documenting how research papers become production systems.
+  <b>Architected Intelligence</b><br/>
+  Technical architecture reports from the Metaventions ecosystem — from research papers to production systems.
 </p>
 
 ---
@@ -49,7 +49,7 @@ Each report lives in its own directory as a standalone `index.html` — no build
 **Stack:**
 - Pure HTML/CSS — zero JavaScript dependencies
 - Inter + JetBrains Mono typography
-- Dark theme (`#0a0a0f` base) with accent palette
+- Dark theme (`#08080d` base) with Metaventions accent palette (`#E8754A` amber, `#4A9EE8` blue, `#4AE8A0` green)
 - Deployed to Vercel with clean URL rewrites
 
 ## Adding a New Report
@@ -75,5 +75,5 @@ Paper to Production is one component of the **Metaventions D-Ecosystem** — a s
 [MIT](LICENSE) — Copyright 2026 Metaventions AI
 
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0a0a0f,50:7c5cff,100:00d68f&height=100&section=footer" width="100%" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:08080d,50:E8754A,100:4AE8A0&height=100&section=footer" width="100%" />
 </p>
