@@ -25,7 +25,7 @@ This is not a blog. Every report is backed by real system telemetry, real DQ sco
 
 | Report | Date | Key Metrics |
 |--------|------|-------------|
-| [The 28-Wire Nervous System](https://paper-to-production.vercel.app/28-wire-nervous-system-report) | March 11, 2026 | DQ 0.704 → 0.952 · +32% in one session · 28 wires · SUPERMAX +12.4% |
+| [The 28-Wire Nervous System](https://paper-to-production.vercel.app/28-wire-nervous-system-report) | March 11, 2026 | 28 wires · 6 feedback loops · corrected 2026-09-26 (DQ lift and SUPERMAX figures withdrawn) |
 
 > How 17 isolated AI components were wired into a compound intelligence engine — with measurable DQ improvement, autonomous SUPERMAX escalation, and 6 closed feedback loops.
 

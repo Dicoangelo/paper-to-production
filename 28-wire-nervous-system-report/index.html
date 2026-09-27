@@ -441,6 +441,9 @@
 <!-- EXECUTIVE SUMMARY -->
 <section>
   <h2>Executive Summary</h2>
+  <div class="callout amber">
+    <strong>Correction notice (2026-09-26).</strong> An audit of this report against the code, git history and routing logs found that several headline claims do not hold. (1) The +12.4% SUPERMAX lift compared two arms scored with different weights and different scorers; on one weighting it is +7.4% to +10.2%, almost all from correctness, and no ground-truth outcome was measured. (2) The &minus;95.4% variance figure is not a quality signal: consensus specificity was a constant 1.0 on every query. (3) Wire 23 never fired: <code>routing_confidence</code> was logged as 1.0 on all 8 rows that ever carried it, and no escalation was ever logged. Wires 21&ndash;23 were built as uncommitted edits on 2026-03-11, never committed, and reset out of the working tree by an automatic git stash on 2026-07-21; none of them is in the running code today. (4) &ldquo;0.952 today&rdquo; is the mean of 12 test prompts typed during the wiring session, not live routing. The benchmark was previously described as a replication of arXiv:2511.15755. It was an adaptation: the V+S+C formula comes from that paper, rebuilt on our own scorer and Claude-based SUPERMAX agents (the paper used local Ollama models on incident response). The paper itself was withdrawn by its author on 2026-08-31 after a code audit, its results were never a valid comparison target, and the replication claim has been removed. Corrected passages are marked inline.
+  </div>
   <div class="exec-grid">
     <div class="exec-card green">
       <div class="value">28</div>
@@ -456,7 +459,7 @@
     </div>
     <div class="exec-card amber">
       <div class="value">0.952</div>
-      <div class="label">Today's Avg DQ</div>
+      <div class="label">Avg DQ, 12 test prompts*</div>
     </div>
   </div>
 
@@ -465,7 +468,7 @@
   <p>In a single session, 28 wires were surgically installed across 5 functional layers, creating a compound intelligence engine with 6 closed feedback loops, 3 self-learning mechanisms, and an autonomous escalation path from single-model routing to multi-agent consensus. The system now validates its own improvement &mdash; and it's <strong>measurably getting better</strong>.</p>
 
   <div class="callout green">
-    <strong>Key Result:</strong> Pattern-enhanced routing decisions jumped from 0% to 83% of today's decisions. Average DQ score rose from 0.704 (30-day baseline) to 0.952 (today). The SUPERMAX auto-trigger (Wire 23) now autonomously invokes multi-agent consensus for genuinely uncertain complex decisions, delivering +12.4% DQ lift.
+    <strong>Key Result (corrected):</strong> 10 of 12 test prompts run during the wiring session were pattern-enhanced (83%), and those 12 prompts averaged DQ 0.952 against a 30-day average of 0.704 that was mostly backfilled session records. The two numbers are not like-for-like, so this is not a measured lift. The SUPERMAX auto-trigger (Wire 23) was designed but has never fired.
   </div>
 
   <details class="commentary">
@@ -479,11 +482,12 @@
       <div class="stat-row">
         <div class="stat-pill"><span class="sp-val">0.704</span><span class="sp-lbl">30-day DQ baseline</span></div>
         <div class="stat-pill"><span class="sp-val">0.3%</span><span class="sp-lbl">Pattern-enhanced decisions (30d)</span></div>
-        <div class="stat-pill"><span class="sp-val">0.952</span><span class="sp-lbl">DQ today (post-wires)</span></div>
+        <div class="stat-pill"><span class="sp-val">0.952</span><span class="sp-lbl">DQ on 12 test prompts</span></div>
         <div class="stat-pill"><span class="sp-val">83%</span><span class="sp-lbl">Pattern-enhanced today</span></div>
-        <div class="stat-pill"><span class="sp-val">+32%</span><span class="sp-lbl">DQ lift in one session</span></div>
+        <div class="stat-pill"><span class="sp-val">n=12</span><span class="sp-lbl">prompts behind the 0.952</span></div>
       </div>
       <p>The weekly trend before: W03 &rarr; 0.725, W04 dropped to 0.608, bounced W05&ndash;W06, dipped again W07&ndash;W08, recovered W09 &rarr; 0.719. The system oscillated without direction. Then W10 (after the 28 wires): <strong>0.952 &mdash; a +32% jump in a single session</strong>.</p>
+      <p><em>Correction 2026-09-26:</em> W10 &ldquo;0.952&rdquo; is 12 hand-typed test prompts (some duplicated) entered between 07:45 and 09:14 on 2026-03-11. The earlier weeks are dominated by backfilled records of the model a session ran on, which are not routing decisions. The comparison does not show a lift.</p>
 
       <h4>Root Cause 1: The Staleness Bug (Wire 3)</h4>
       <p>Cognitive OS weights expired after <strong>30 minutes</strong>. Expertise routing expired after <strong>1 hour</strong>. In practice, every session started with cold, stale data. Wire 3 extended these to <strong>4 hours and 8 hours</strong> respectively. The cross-component integration that was silently disabling itself now stays active across your entire working session. Wire 28 adds a background timer that refreshes cognitive weights every 90 minutes, so long sessions crossing cognitive energy boundaries get fresh signals automatically.</p>
@@ -494,12 +498,13 @@
 
       <h4>Root Cause 3: DQ Correctness Was Blind (Wire 22)</h4>
       <p>DQ scoring has three components &mdash; validity, specificity, and correctness. When no similar past query existed, correctness returned <strong>0.5</strong> &mdash; a coin flip. Wire 22 replaced that blind fallback with the 4,377 session outcomes already in the system (quality-scored 1&ndash;5 stars, normalized to 0.2&ndash;1.0). Novel queries now get a real correctness prior based on what quality historically came from similar sessions.</p>
+      <p><em>Correction 2026-09-26:</em> this fallback was built as uncommitted edits on 2026-03-11, never committed, and reset out of the working tree by an automatic git stash on 2026-07-21, so it is not in <code>dq-scorer.js</code> today. 124 of 335 production rows with components still score correctness at exactly 0.5.</p>
 
       <h4>The Compound Modifier: 11 Signals in One Formula</h4>
       <p>Post-wiring, every routing decision computes: <code>effective_complexity = raw &divide; (cognitive &times; pattern &times; velocity) + tool_failure_boost + error_boost + tool_volume_boost + expertise_boost</code>. Right now the live modifier is <strong>1.20&times;</strong> (architecture pattern confirmed + research tool volume + expertise boost active) &mdash; inflating perceived complexity so Opus gets routed more on architecture work, which is exactly correct.</p>
 
-      <h4>The SUPERMAX Auto-Trigger: The +12.4% Layer (Wire 23)</h4>
-      <p>Wire 21 calculates <strong>routing confidence</strong> from the spread between DQ scores across candidate models. High spread (&gt;0.15) = certain call. Low spread (&lt;0.05) = coin flip. Wire 23 adds the escalation rule: when <code>routing_confidence &lt; 0.40</code> AND <code>complexity &gt; 0.60</code> AND you&rsquo;re not already on Opus, the system auto-escalates to SUPERMAX multi-agent consensus. The DQ benchmark (arXiv:2511.15755, 100 queries) proved this delivers <strong>+12.4% DQ lift</strong> and <strong>&minus;95.4% variance reduction</strong>. Wire 23 doesn&rsquo;t invoke SUPERMAX on everything &mdash; that would waste 3&times; cost. It reserves consensus for genuinely ambiguous complex cases where deliberation actually moves the needle.</p>
+      <h4>The SUPERMAX Auto-Trigger (Wire 23)</h4>
+      <p>Wire 21 calculates <strong>routing confidence</strong> from the spread between DQ scores across candidate models. High spread (&gt;0.15) = certain call. Low spread (&lt;0.05) = coin flip. Wire 23 adds the escalation rule: when <code>routing_confidence &lt; 0.40</code> AND <code>complexity &gt; 0.60</code> AND you&rsquo;re not already on Opus, the system auto-escalates to SUPERMAX multi-agent consensus. <em>Correction 2026-09-26:</em> Wire 23 has never fired. <code>routing_confidence</code> was logged as 1.0 on every one of the 8 rows that ever carried it, so the &lt;0.40 condition could not be met, and no escalation was ever logged. The wiring was built as uncommitted edits on 2026-03-11, never committed, and reset out of the working tree by an automatic git stash on 2026-07-21. The benchmark numbers once quoted here are corrected in section 12. As designed, Wire 23 doesn&rsquo;t invoke SUPERMAX on everything &mdash; that would waste 3&times; cost. It reserves consensus for genuinely ambiguous complex cases where deliberation actually moves the needle.</p>
 
       <h4>Why the Jump Was So Large in One Session</h4>
       <p>The signals already existed: 4,949 routing decisions, 4,377 session outcomes, 141K tool events, 31MB of SQLite telemetry &mdash; all sitting in files that routing never touched. The 28 wires didn&rsquo;t add new data. They <strong>connected existing data to the decision point</strong>. The system had been running blind for weeks with a fully built but fully disconnected intelligence layer. Wiring it took one session. The lift was immediate.</p>
@@ -706,7 +711,7 @@
     <div class="wire-card">
       <span class="wire-num layer-routing">21</span>
       <span class="wire-title">Routing Confidence</span>
-      <div class="wire-desc">Calculates <code>routing_confidence</code> from DQ score spread across candidates. High spread (&gt;0.15) = certain. Low spread (&lt;0.05) = coin flip. Foundation for Wire 23.</div>
+      <div class="wire-desc">Calculates <code>routing_confidence</code> from DQ score spread across candidates. High spread (&gt;0.15) = certain. Low spread (&lt;0.05) = coin flip. Foundation for Wire 23. <em>Correction: logged 1.0 on all 8 rows; never committed, removed 2026-07-21.</em></div>
       <div class="wire-files">dq-scorer.js (after candidate scoring)</div>
     </div>
     <div class="wire-card">
@@ -750,7 +755,7 @@
     <div class="wire-card">
       <span class="wire-num layer-escalation">23</span>
       <span class="wire-title">SUPERMAX Auto-Trigger</span>
-      <div class="wire-desc">When <code>routing_confidence &lt; 0.40</code> AND <code>complexity &gt; 0.60</code> AND model isn't already Opus, auto-escalates to coordinator council strategy. DQ benchmark showed +12.4% DQ lift from consensus.</div>
+      <div class="wire-desc">When <code>routing_confidence &lt; 0.40</code> AND <code>complexity &gt; 0.60</code> AND model isn't already Opus, auto-escalates to coordinator council strategy. <em>Correction: never fired; never committed, removed 2026-07-21.</em></div>
       <div class="wire-files">claude-wrapper.sh (after DQ scoring)</div>
     </div>
   </div>
@@ -834,7 +839,7 @@
      AND current_model != opus
   THEN
      AUTO-ESCALATE &rarr; SUPERMAX Council (multi-agent consensus)
-     Expected: +12.4% DQ lift, -95.4% variance
+     Status (2026-09-26): never fired; routing_confidence was always 1.0
   </div>
 
   <h3>Pattern Modifiers</h3>
@@ -940,7 +945,7 @@
   </table>
 
   <div class="callout green">
-    <strong>Week 10 spike:</strong> The 28-wire system went live during W10. DQ average jumped from 0.719 to 0.952 (+32%) with 83% pattern-enhanced decisions. The compound modifier + dual-signal pattern corroboration + session outcome correctness are producing measurably higher-quality routing.
+    <strong>Week 10 (corrected):</strong> The W10 row is 12 test prompts typed during the wiring session, not live routing, and the earlier weeks are mostly backfilled session records. The 0.719 &rarr; 0.952 change is not a measured improvement. Session-outcome correctness (Wire 22) was never committed and is no longer in the scorer.
   </div>
 </section>
 
@@ -1075,7 +1080,8 @@
   <p>With 28 wires connected, the system exhibits capabilities that no individual component was designed to produce:</p>
 
   <h3>9.1 Autonomous Model Escalation</h3>
-  <p>Wires 21 and 23 create automatic escalation for genuinely uncertain decisions. When the DQ scorer can't differentiate between model candidates (low spread), AND the query is complex, the system bypasses single-model routing entirely and invokes SUPERMAX multi-agent consensus. The DQ benchmark proved this delivers +12.4% DQ improvement with -95.4% variance reduction. The system decides when it needs help.</p>
+  <p>Wires 21 and 23 create automatic escalation for genuinely uncertain decisions. When the DQ scorer can't differentiate between model candidates (low spread), AND the query is complex, the system bypasses single-model routing entirely and invokes SUPERMAX multi-agent consensus. The system was designed to decide when it needs help.</p>
+  <p><em>Correction 2026-09-26:</em> this escalation has never fired (<code>routing_confidence</code> was always 1.0), and the benchmark figures previously quoted here did not hold up. See section 12.</p>
 
   <h3>9.2 Dual-Signal Intelligence</h3>
   <p>Wire 20 gives Pattern Detection a second brain. Keyword detection says "architecture" &mdash; but are you actually reading files (research), editing files (implementation), or running bash (debugging)? The tool behavior from SQLite either confirms (1.3x confidence) or contradicts (0.85x) the keyword signal. When keywords miss entirely but behavior is clear (70%+ bash = debugging), the system injects the pattern from behavior alone. False patterns from keyword coincidences are eliminated.</p>
@@ -1094,6 +1100,7 @@
 
   <h3>9.7 Self-Validating Improvement</h3>
   <p>Wire 10 runs a self-benchmark after every session. Result after 28 wires: DQ scores trending upward (+0.043 over 30d), 83% pattern-enhanced decisions, and today's average DQ of 0.952 &mdash; a +35% improvement over the 30-day baseline of 0.704.</p>
+  <p><em>Correction 2026-09-26:</em> 0.952 is the mean of 12 test prompts and 0.704 is mostly backfilled session records, so this is not a like-for-like improvement.</p>
 </section>
 
 <!-- INFRASTRUCTURE STATUS -->
@@ -1144,7 +1151,7 @@
 <!-- SUPERMAX AGENT ARCHITECTURE -->
 <section>
   <h2>12. SUPERMAX Agent Architecture</h2>
-  <p>Wire 23 auto-escalates uncertain complex decisions to the SUPERMAX multi-agent consensus engine. This is the architecture of the council system that sits above single-model DQ routing &mdash; a 21-agent roster organized into 5 councils with 18 cross-agent handoff wires.</p>
+  <p>Wire 23 was designed to auto-escalate uncertain complex decisions to the SUPERMAX multi-agent consensus engine (it has never fired; see the correction notice). This is the architecture of the council system that sits above single-model DQ routing &mdash; a 21-agent roster organized into 5 councils with 18 cross-agent handoff wires.</p>
 
   <h3>Escalation Pipeline</h3>
   <div class="diagram-block">
@@ -1375,37 +1382,39 @@
   </table>
 
   <h3>DQ Benchmark: Single-Model vs SUPERMAX</h3>
-  <p>100-query controlled benchmark replicating arXiv:2511.15755:</p>
+  <p>100-query benchmark run on 2026-02-16, comparing single-model DQ routing with a 3-agent SUPERMAX consensus, using the V+S+C formula adapted from arXiv:2511.15755. <em>Corrected 2026-09-26:</em> the figures originally shown here (+12.4% DQ, &minus;95.4% variance) are replaced below. The benchmark scripts and per-query data were never committed and cannot be re-run.</p>
 
   <div class="exec-grid">
     <div class="exec-card green">
-      <div class="value">+12.4%</div>
-      <div class="label">DQ Improvement</div>
+      <div class="value">+7&ndash;10%</div>
+      <div class="label">DQ lift, same weights (was +12.4%)</div>
     </div>
     <div class="exec-card accent">
-      <div class="value">-95.4%</div>
-      <div class="label">Variance Reduction</div>
+      <div class="value">n/a</div>
+      <div class="label">Variance: not a quality signal</div>
     </div>
     <div class="exec-card blue">
-      <div class="value">+1.35x</div>
-      <div class="label">Correctness Gain</div>
+      <div class="value">?</div>
+      <div class="label">Correctness: different instruments</div>
     </div>
     <div class="exec-card amber">
       <div class="value">3x</div>
-      <div class="label">Eval Cost (justified)</div>
+      <div class="label">Eval cost (benefit unproven)</div>
     </div>
   </div>
 
   <table>
     <tr><th>Metric</th><th>Single-Model</th><th>SUPERMAX Consensus</th><th>Change</th></tr>
-    <tr><td>Average DQ</td><td>0.824</td><td>0.926</td><td><span class="tag tag-green">+12.4%</span></td></tr>
+    <tr><td>Average DQ (as published)</td><td>0.824</td><td>0.926</td><td>+12.4%, arms weighted differently</td></tr>
+    <tr><td>Average DQ, weights 0.4/0.3/0.3 both arms</td><td>0.862</td><td>0.926</td><td>+7.4%</td></tr>
+    <tr><td>Average DQ, weights 0.35/0.25/0.40 both arms</td><td>0.824</td><td>0.909</td><td>+10.2%</td></tr>
     <tr><td>Actionable</td><td>100%</td><td>100%</td><td>&mdash;</td></tr>
-    <tr><td>Variance</td><td>0.005527</td><td>0.000255</td><td><span class="tag tag-green">-95.4%</span></td></tr>
-    <tr><td>Correctness</td><td>0.600</td><td>0.808</td><td><span class="tag tag-green">+1.35x</span></td></tr>
+    <tr><td>Variance across queries</td><td>0.005527</td><td>0.000255</td><td>Specificity was a constant 1.0 in the consensus arm</td></tr>
+    <tr><td>Correctness</td><td>0.600</td><td>0.808</td><td>0.5 fallback vs evaluator judgement; no ground truth</td></tr>
   </table>
 
   <div class="callout">
-    <strong>Wire 23 Decision Logic:</strong> SUPERMAX is only invoked when routing confidence is low (&lt;0.40) AND complexity is high (&gt;0.60). For clear-cut routing decisions (high DQ spread), single-model DQ routes instantly. This means the 3x eval cost of multi-agent consensus is only spent where it delivers the +12.4% DQ lift &mdash; not on trivial queries.
+    <strong>Wire 23 Decision Logic (as designed):</strong> SUPERMAX was to be invoked only when routing confidence is low (&lt;0.40) AND complexity is high (&gt;0.60). In practice it never fired. Whether consensus improves routing is still untested: that needs one scorer for both arms and a measured outcome, not evaluator-assigned correctness.
   </div>
 
   <h3 style="margin: 32px 0 16px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent);">Council Architecture Diagram</h3>
